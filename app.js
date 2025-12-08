@@ -1040,8 +1040,9 @@ createNoteCard(item) {
                 <h3 class="note-title">${item.title}</h3>
                 ${typeBadge}
             </div>
-            <div class="note-date">${fechaFormatted}</div>
+            
         </div>
+        <div class="note-date">${fechaFormatted}</div>
         <div class="note-content">${preview}</div>
         ${tagsHTML}
     `;
@@ -1116,21 +1117,6 @@ createNoteCard(item) {
         let tarotInfoHTML = '';
         if (item.tarot_card) {
             const card = item.tarot_card;
-            tarotInfoHTML = `
-                <div class="tarot-card-info-modal">
-                    <h4>Información de la carta:</h4>
-                    <div class="tarot-card-details-modal">
-                        <div><strong>Carta:</strong> ${card.Name}</div>
-                        <div><strong>Palo:</strong> ${card.Suit}</div>
-                        <div><strong>Tipo:</strong> ${card.Type}</div>
-                        ${card.Sign ? `<div><strong>Signo:</strong> ${card.Sign}</div>` : ''}
-                        ${card.Element ? `<div><strong>Elemento:</strong> ${card.Element}</div>` : ''}
-                        ${card.Planet ? `<div><strong>Planeta:</strong> ${card.Planet}</div>` : ''}
-                        ${card.Numerology ? `<div><strong>Numerología:</strong> ${card.Numerology}</div>` : ''}
-                        <div><strong>Orientación:</strong> ${item.orientation === 'upright' ? 'Upright' : 'Reversed'}</div>
-                    </div>
-                </div>
-            `;
         }
         
         document.getElementById('modal-note-title').textContent = item.title;
