@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANTHOLOGÍA</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .astro {
+            font-family: 'Astronomicon', sans-serif;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation Rail for Desktop -->
+<nav class="md-navigation-rail">
+    <div class="nav-header">
+        <button class="md-icon-button nav-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <h1 class="nav-title">ANTHOLOGÍA</h1>
+    </div>
+    
+    <div class="nav-items">
+        <a href="#" class="nav-item active" data-section="notes">
+            <i class="fas fa-book"></i>
+            <span class="nav-label">Notas</span>
+        </a>
+        <a href="#" class="nav-item" data-section="new-note">
+            <i class="fas fa-plus"></i>
+            <span class="nav-label">Nueva</span>
+        </a>
+        <a href="#" class="nav-item" data-section="filters">
+            <i class="fas fa-filter"></i>
+            <span class="nav-label">Filtros</span>
+        </a>
+        <a href="#" class="nav-item" data-section="symbols">
+            <i class="fas fa-star-and-crescent"></i>
+            <span class="nav-label">Símbolos</span>
+        </a>
+    </div>
+        
+    <div class="nav-footer">
+        <button class="md-icon-button theme-toggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+</nav>
+
+    <!-- Main Content Area -->
+    <main class="md-main-content">
+        <!-- App Bar -->
+        <header class="md-app-bar">
+            <div class="app-bar-content">
+                <h1 class="app-bar-title">ANTHOLOGÍA</h1>
+                <div class="app-bar-actions">
+                    <div class="md-search-field">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" placeholder="Buscar notas...">
+                    </div>
+                    <button class="md-fab md-fab-small">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content Sections -->
+        <div class="content-sections">
+            <!-- Notes List Section -->
+            <section id="notes-section" class="content-section active">
+                <div class="section-header">
+                    <h2>Mis Notas</h2>
+                    <div class="section-actions">
+                        <div class="md-chip-group">
+                            <div class="md-chip active" data-filter="all">Todas</div>
+                            <div class="md-chip" data-filter="today">Hoy</div>
+                            <div class="md-chip" data-filter="week">Esta semana</div>
+                            <div class="md-chip" data-filter="starred">Destacadas</div>
+                        </div>
+                        <button class="md-icon-button">
+                            <i class="fas fa-sort"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="notes-grid" id="notes-grid">
+                    <!-- Notes will be loaded here -->
+                    <div class="loading-state">
+                        <div class="loading-spinner"></div>
+                        <p>Cargando notas...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- New Note Section -->
+            <section id="new-note-section" class="content-section">
+                <div class="section-header">
+                    <h2>Nueva Nota</h2>
+                </div>
+
+                <div class="md-card new-note-form">
+                    <form id="note-form">
+                        <h3 class="filter-title">GENERAL</h3>
+
+                        <div class="md-text-field">
+                            <input type="text" id="note-title" class="text-field-input" required>
+                            <label for="note-title" class="text-field-label">Título</label>
+                            <div class="text-field-helper">Opcional - Un título breve para identificar la nota</div>
+                        </div>
+                        <div class="form-row">
+                            <div class="md-text-field">
+                                <input type="date" id="note-date" class="text-field-input" required>
+                                <label for="note-date" class="text-field-label">Fecha</label>
+                            </div>
+                        </div>
+
+                        <div class="md-text-field">
+                            <textarea id="note-content" class="text-field-input textarea" rows="6" required></textarea>
+                            <label for="note-content" class="text-field-label">Nota *</label>
+                            <div class="text-field-helper">Escribe tus observaciones astrológicas aquí</div>
+                        </div>
+                        <h3 class="filter-title">ETIQUETAS</h3>
+
+                        <div class="form-section">
+                            <div class="tags-selector" id="tags-selector">
+                                <!-- Tags will be loaded from JavaScript -->
+                            </div>
+                            <div class="selected-tags" id="selected-tags">
+                                <!-- Selected tags will appear here -->
+                            </div>
+                            <div class="md-text-field">
+                                <input type="text" id="custom-tag" class="text-field-input" placeholder=" ">
+                                <label for="custom-tag" class="text-field-label">Otras</label>
+                                <div class="text-field-helper">Escribe y presiona Enter para agregar</div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="md-text-button" id="clear-form">
+                                <i class="fas fa-trash"></i>
+                                Limpiar
+                            </button>
+                            <button type="submit" class="md-filled-button">
+                                <i class="fas fa-save"></i>
+                                Guardar Nota
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Filters Section -->
+            <section id="filters-section" class="content-section">
+                <div class="section-header">
+                    <h2>Filtros</h2>
+                </div>
+
+                <div class="md-card filters-card">
+                    <div class="filter-group">
+                        <h3 class="filter-title">Búsqueda</h3>
+                        <div class="md-text-field">
+                            <input type="text" id="search-filter" class="text-field-input">
+                            <label for="search-filter" class="text-field-label">Buscar en notas...</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h3 class="filter-title">Fecha</h3>
+                        <div class="date-filters">
+                            <div class="md-text-field">
+                                <input type="date" id="date-from" class="text-field-input">
+                                <label for="date-from" class="text-field-label">Desde</label>
+                            </div>
+                            <div class="md-text-field">
+                                <input type="date" id="date-to" class="text-field-input">
+                                <label for="date-to" class="text-field-label">Hasta</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h3 class="filter-title">Etiquetas</h3>
+                        <div class="tags-filter" id="tags-filter">
+                            <!-- Filter tags will be loaded here -->
+                        </div>
+                    </div>
+
+                    <div class="filter-actions">
+                        <button class="md-outlined-button" id="clear-filters">
+                            <i class="fas fa-broom"></i>
+                            Limpiar Filtros
+                        </button>
+                        <button class="md-filled-button" id="apply-filters">
+                            <i class="fas fa-filter"></i>
+                            Aplicar Filtros
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Symbols Section -->
+            <section id="symbols-section" class="content-section">
+                <div class="section-header">
+                    <h2>Símbolos Astrológicos</h2>
+                    <div class="section-actions">
+                        <div class="md-chip-group" id="symbol-categories">
+                            <!-- Categories will be loaded from JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="symbols-grid" id="symbols-grid">
+                    <!-- Symbols will be loaded from JavaScript -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Bottom Navigation for Mobile -->
+    <nav class="md-bottom-navigation">
+        <a href="#" class="bottom-nav-item active" data-section="notes">
+            <i class="fas fa-book"></i>
+            <span class="bottom-nav-label">Notas</span>
+        </a>
+        <a href="#" class="bottom-nav-item" data-section="new-note">
+            <i class="fas fa-plus"></i>
+            <span class="bottom-nav-label">Nueva</span>
+        </a>
+        <a href="#" class="bottom-nav-item" data-section="filters">
+            <i class="fas fa-filter"></i>
+            <span class="bottom-nav-label">Filtros</span>
+        </a>
+        <a href="#" class="bottom-nav-item" data-section="symbols">
+            <i class="fas fa-star"></i>
+            <span class="bottom-nav-label">Símbolos</span>
+        </a>
+    </nav>
+
+    <!-- Note Detail Modal -->
+    <div class="md-modal" id="note-modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-container">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="modal-note-title"></h2>
+                    <button class="md-icon-button modal-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="modal-body">
+                    <div class="note-meta">
+                        <div class="note-date" id="modal-note-date"></div>
+                        <div class="note-tags" id="modal-note-tags"></div>
+                    </div>
+                    
+                    <div class="note-content" id="modal-note-content"></div>
+                    
+                    <div class="note-footer">
+                        <div class="note-created">
+                            <i class="fas fa-clock"></i>
+                            <span id="modal-note-created"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="md-outlined-button" id="edit-note">
+                        <i class="fas fa-edit"></i>
+                        Editar
+                    </button>
+                    <button class="md-filled-button tonal" id="delete-note">
+                        <i class="fas fa-trash"></i>
+                        Eliminar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="symbols.js"></script>
+<script src="app.js"></script>
+
+<div class="md-snackbar" id="snackbar">
+    <div class="snackbar-content">
+        <div class="snackbar-message" id="snackbar-message"></div>
+        <button class="snackbar-close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Agregar antes del cierre del body, después del note-modal -->
+<!-- Tarot Card Modal -->
+<div class="md-modal" id="tarot-modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-container">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="tarot-modal-title"></h2>
+                <button class="md-icon-button tarot-modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="tarot-card-info">
+                    <div class="tarot-card-header">
+                        <div class="tarot-card-symbol" id="tarot-card-symbol"></div>
+                        <div class="tarot-card-details">
+                            <div class="tarot-card-item"><strong>Suit:</strong> <span id="tarot-card-suit"></span></div>
+                            <div class="tarot-card-item"><strong>Type:</strong> <span id="tarot-card-type"></span></div>
+                            <div class="tarot-card-item"><strong>Numerology:</strong> <span id="tarot-card-numerology"></span></div>
+                            <div class="tarot-card-item"><strong>Planet:</strong> <span id="tarot-card-planet"></span></div>
+                            <div class="tarot-card-item"><strong>Sign:</strong> <span id="tarot-card-sign"></span></div>
+                            <div class="tarot-card-item"><strong>Element:</strong> <span id="tarot-card-element"></span></div>
+                            <div class="tarot-card-item"><strong>Septenary:</strong> <span id="tarot-card-septenary"></span></div>
+                            <div class="tarot-card-item"><strong>Vertical:</strong> <span id="tarot-card-vertical"></span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="tarot-sections">
+                        <div class="tarot-section">
+                            <h3>Notas relacionadas</h3>
+                            <div class="related-notes" id="tarot-related-notes">
+                                <!-- Notas relacionadas se cargarán aquí -->
+                            </div>
+                        </div>
+                        
+                        <div class="tarot-section">
+                            <h3>Cartas similares</h3>
+                            <div class="similar-cards" id="tarot-similar-cards">
+                                <!-- Cartas con tags similares se cargarán aquí -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
