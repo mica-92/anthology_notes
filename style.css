@@ -2257,3 +2257,132 @@ body {
     font-size: 10px !important;
     z-index: 10 !important;
 }
+
+/* Ajustes para pantallas muy pequeñas (menos de 480px) */
+@media (max-width: 480px) {
+    /* Header más compacto */
+    .md-app-bar {
+        padding: 6px 10px;
+    }
+    
+    .app-bar-title {
+        font-size: 1.6rem;
+    }
+    
+    .app-bar-logo {
+        height: 2.2rem;
+    }
+    
+    /* Acciones del header más pequeñas */
+    .app-bar-actions {
+        gap: 8px;
+    }
+    
+    .md-search-field {
+        width: 180px;
+    }
+    
+    .search-input {
+        padding: 6px 8px 6px 32px;
+        font-size: var(--nb-font-size-sm);
+    }
+    
+    .search-icon {
+        left: 8px;
+        font-size: 14px;
+    }
+    
+    .md-fab-small {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+    
+    /* Bottom navigation más pequeña */
+    .md-bottom-navigation {
+        height: 55px;
+    }
+    
+    .bottom-nav-item {
+        height: 55px;
+        padding: 4px;
+    }
+    
+    .bottom-nav-item i {
+        font-size: 16px;
+    }
+    
+    .bottom-nav-label {
+        font-size: 9px;
+        margin-top: 2px;
+    }
+    
+    /* Ajustar snackbar para nuevo footer */
+    .md-snackbar {
+        bottom: 60px;
+    }
+    
+    /* Reducir tamaño del logo en app bar */
+    .app-bar-logo {
+        height: 2.5rem;
+        margin-right: 3px;
+    }
+}
+
+/* Ajustes adicionales para pantallas extremadamente pequeñas */
+@media (max-width: 360px) {
+    .app-bar-title {
+        font-size: 1.4rem;
+    }
+    
+    .app-bar-logo {
+        height: 2rem;
+    }
+    
+    .md-search-field {
+        width: 150px;
+    }
+    
+    .md-bottom-navigation {
+        height: 50px;
+    }
+    
+    .bottom-nav-item {
+        height: 50px;
+        padding: 3px;
+    }
+    
+    .bottom-nav-item i {
+        font-size: 14px;
+    }
+    
+    .bottom-nav-label {
+        font-size: 8px;
+    }
+}
+
+/* Para iPhone SE y dispositivos muy pequeños */
+@media (max-width: 320px) {
+    .app-bar-title {
+        font-size: 1.2rem;
+    }
+    
+    .app-bar-logo {
+        height: 1.8rem;
+    }
+    
+    .md-fab-small {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+    
+    .search-input {
+        padding: 5px 6px 5px 28px;
+        font-size: var(--nb-font-size-xs);
+    }
+    
+    .search-icon {
+        font-size: 12px;
+    }
+}
