@@ -1,14 +1,13 @@
 const SUPABASE_URL = 'https://mtzdqlhketqsoqiepule.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im10emRxbGhrZXRxc29xaWVwdWxlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI5MjM5ODEsImV4cCI6MjA3ODQ5OTk4MX0.oGzOakzoTndR9IQK3dhPnYLpUsy19asrojB8yTpJCZc';
 
-// Inicializar cliente de Supabase
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
+// 1. CORRECCIÓN: Cambiamos el nombre de 'supabase' a 'supabaseClient' para evitar conflicto con la librería CDN
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 // Base de datos simplificada
 const AstroNotesDB = {
     async getTarotEntries(filters = {}) {
         try {
-            let query = supabase
+            let query = supabaseClient
                 .from('log_entries')
                 .select('*')
                 .eq('entry_type', 'daily')  // Solo entradas diarias
@@ -128,7 +127,7 @@ const AstroNotesDB = {
 
     async getAllNotes(filters = {}) {
         try {
-            let query = supabase
+            let query = supabaseClient
                 .from('astro_notes')
                 .select('*')
                 .order('fecha', { ascending: false });
@@ -162,7 +161,7 @@ const AstroNotesDB = {
 
     async getNoteById(id) {
         try {
-            const { data, error } = await supabase
+            const { data, error } = await supabaseClient
                 .from('astro_notes')
                 .select('*')
                 .eq('id', id)
@@ -179,7 +178,7 @@ const AstroNotesDB = {
 
     async createNote(noteData) {
         try {
-            const { data, error } = await supabase
+            const { data, error } = await supabaseClient
                 .from('astro_notes')
                 .insert([noteData])
                 .select()
@@ -197,7 +196,7 @@ const AstroNotesDB = {
 
     async updateNote(id, noteData) {
         try {
-            const { data, error } = await supabase
+            const { data, error } = await supabaseClient
                 .from('astro_notes')
                 .update(noteData)
                 .eq('id', id)
@@ -216,7 +215,7 @@ const AstroNotesDB = {
 
     async deleteNote(id) {
         try {
-            const { error } = await supabase
+            const { error } = await supabaseClient
                 .from('astro_notes')
                 .delete()
                 .eq('id', id);
